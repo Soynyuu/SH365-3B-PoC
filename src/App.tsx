@@ -33,21 +33,15 @@ const App: React.FC = () => {
     loadModel();
   }, []);
 
-  const videoConstraints = {
-    width: 1280,
-    height: 720,
-    facingMode: 'user',
-  };
-
   return (
     <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
       <Webcam
         ref={webcamRef}
-        videoConstraints={videoConstraints}
         style={{
           position: 'absolute',
           top: 0,
-          left: 0,
+          left: '50%',
+          transform: 'translateX(-50%)',
           width: '100%',
           height: '100%',
           objectFit: 'cover',
@@ -64,7 +58,7 @@ const App: React.FC = () => {
             width: `${(prediction.bbox[2] / webcamRef.current!.video!.videoWidth) * 100}%`,
             height: `${(prediction.bbox[3] / webcamRef.current!.video!.videoHeight) * 100}%`,
             color: 'red',
-            fontSize: 'calc(10px + 1vw)',
+            fontSize: 'calc(8px + 2vw)', // スマホ向けにフォントサイズを調整
             fontWeight: 'bold',
           }}
         >
@@ -76,9 +70,9 @@ const App: React.FC = () => {
           style={{
             position: 'absolute',
             bottom: 0,
-
+            left: '50%',
             transform: 'translateX(-50%)',
-            width: '100%',
+            width: '100%', // 幅を100%以下に制限
             padding: '16px',
             backgroundColor: 'rgba(255, 255, 255, 0.8)',
           }}
